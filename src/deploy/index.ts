@@ -169,13 +169,15 @@ export default createBuilder(
                 `Deploying project from 📂 ./${builderConfig.outputPath}`
             );
 
-            let config = {};
+            let config: any = {
+                draft: builderConfig.draft 
+            };
 
             if (builderConfig.functionsPath) {
                 console.log(
                     `Deploying functions from 📂 ./${builderConfig.functionsPath}`
                 );
-                config = { ...config, fnDir: builderConfig.functionsPath };
+                config = { ...config, fnDir: builderConfig.functionsPath  };
             }
 
             const response = await client.deploy(

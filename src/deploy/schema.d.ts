@@ -9,4 +9,5 @@ export interface Schema {
     baseHref?: string;
     create?: boolean;
     withDeps?: boolean;
+    draft?: boolean;
 }

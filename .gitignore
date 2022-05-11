@@ -1,8 +1,0 @@
-*.js
-*.map
-node_modules
-*.js
-*.js.map
-.gitignore
-*.code-workspace
-**/package-lock.json
