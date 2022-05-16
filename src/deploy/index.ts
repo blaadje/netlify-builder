@@ -168,7 +168,7 @@ export default createBuilder(
         // lets deploy the application to the site
         try {
             context.logger.info(
-                `Deploying project from 📂 ./${builderConfig.netlifyConfig.outputPath}`
+                `Deploying project from 📂 ./${builderConfig.outputPath}`
             );
 
             let config
@@ -182,7 +182,7 @@ export default createBuilder(
 
             const response = await client.deploy(
                 siteId,
-                builderConfig.netlifyConfig.outputPath,
+                builderConfig.outputPath,
                 { ...config, ...config.netlifyConfig }
             );
             context.logger.info(
