@@ -133,12 +133,33 @@ exports.default = architect_1.createBuilder((builderConfig, context) => __awaite
     // lets deploy the application to the site
     try {
         context.logger.info(`Deploying project from 📂 ./${builderConfig.outputPath}`);
-        let config;
-        if (builderConfig.netlifyConfig.functionsPath) {
-            console.log(`Deploying functions from 📂 ./${builderConfig.netlifyConfig.functionsPath}`);
-            config = Object.assign(Object.assign({}, config), { fnDir: builderConfig.netlifyConfig.functionsPath });
+        if (builderConfig.fnDir) {
+            console.log(`Deploying functions from 📂 ./${builderConfig.fnDir}`);
         }
-        const response = yield client.deploy(siteId, builderConfig.outputPath, Object.assign(Object.assign({}, config), builderConfig.netlifyConfig));
+        const netlifyOptionsList = [
+            'functionsPath',
+            'fnDir',
+            'branch',
+            'configPath',
+            'draft',
+            'message',
+            'deployTimeout',
+            'parallelHash',
+            'parallelUpload',
+            'maxRetry',
+            'filter',
+            'tmpDir',
+            'statusCb',
+            'deployId',
+        ];
+        const netlifyOptions = netlifyOptionsList.reduce((acc, item) => {
+            if (typeof builderConfig[item] === 'undefined') {
+                return acc;
+            }
+            return Object.assign(Object.assign({}, acc), { [item]: builderConfig[item] });
+        }, {});
+        console.log(netlifyOptions);
+        const response = yield client.deploy(siteId, builderConfig.outputPath, netlifyOptions);
         context.logger.info(`✔ Your updated site 🕸  is running at ${response.deploy.ssl_url}`);
         return { success: true };
     }

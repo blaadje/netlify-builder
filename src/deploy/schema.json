@@ -41,10 +41,44 @@
             "default": false,
             "description": "To be used with Nx if app needs to be built with-deps"
         },
-        "netlifyConfig": {
-            "type": "object",
-            "default": {},
-            "description": "Provide netlify options"
+        "fnDir": {
+            "type": "string",
+            "description": "path to a folder of functions to deploys"
+        },
+        "branch": {
+            "type": "string",
+            "description": "branch to pass onto the netlify apideploys"
+        },
+        "configPath": {
+            "type": "string",
+            "description": "path to a netlify.toml file to include in the deploy (e.g. redirect support for manual deploys)deploys"
+        },
+        "draft": {
+            "type": "boolean",
+            "description": "draft deploy or production deploys"
+        },
+        "message": {
+            "type": "undefined",
+            "description": "a short message to associate with the deploys"
+        },
+        "deployTimeout": {
+            "type": "number",
+            "description": "20 minsdeploys"
+        },
+        "parallelHash": {
+            "type": "number",
+            "description": "number of parallel hashing callsdeploys"
+        },
+        "parallelUpload": {
+            "type": "number",
+            "description": "number of files to upload in paralleldeploys"
+        },
+        "maxRetry": {
+            "type": "number",
+            "description": "number of times to try on failed file uploadsdeploys"
+        },
+        "tmpDir": {
+            "type": "string"
         }
     }
 }

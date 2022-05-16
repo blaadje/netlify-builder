@@ -171,19 +171,44 @@ export default createBuilder(
                 `Deploying project from 📂 ./${builderConfig.outputPath}`
             );
 
-            let config
-
-            if (builderConfig.netlifyConfig.functionsPath) {
+            if (builderConfig.fnDir) {
                 console.log(
-                    `Deploying functions from 📂 ./${builderConfig.netlifyConfig.functionsPath}`
+                    `Deploying functions from 📂 ./${builderConfig.fnDir}`
                 );
-                config = { ...config, fnDir: builderConfig.netlifyConfig.functionsPath  };
             }
+
+            const netlifyOptionsList = [
+                'functionsPath',
+                'fnDir',
+                'branch',
+                'configPath',
+                'draft',
+                'message',
+                'deployTimeout',
+                'parallelHash',
+                'parallelUpload',
+                'maxRetry',
+                'filter',
+                'tmpDir',
+                'statusCb',
+                'deployId',
+            ]
+
+            const netlifyOptions = netlifyOptionsList.reduce((acc, item) => {
+                if (typeof builderConfig[item] === 'undefined') {
+                    return acc
+                }
+
+                return { ...acc, [item]: builderConfig[item] }
+            }, {})
+
+
+            console.log(netlifyOptions)
 
             const response = await client.deploy(
                 siteId,
                 builderConfig.outputPath,
-                { ...config, ...builderConfig.netlifyConfig }
+                netlifyOptions
             );
             context.logger.info(
                 `✔ Your updated site 🕸  is running at ${response.deploy.ssl_url}`

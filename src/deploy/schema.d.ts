@@ -1,6 +1,5 @@
 interface netlifyOptions {
-    functionsPath?: string;
-    nDir?: string; // path to a folder of functions to deploy
+    fnDir?: string; // path to a folder of functions to deploy
     branch?: string; // branch to pass onto the netlify api
     configPath?: string; // path to a netlify.toml file to include in the deploy (e.g. redirect support for manual deploys)
     draft?: boolean; // draft deploy or production deploy
@@ -16,7 +15,7 @@ interface netlifyOptions {
     deployId?: string;
 }
 
-export interface Schema {
+export interface Schema extends netlifyOptions {
     buildTarget?: string;
     outputPath: string;
     configuration?: string;
@@ -26,5 +25,4 @@ export interface Schema {
     baseHref?: string;
     create?: boolean;
     withDeps?: boolean;
-    netlifyConfig: netlifyOptions;
 }
