@@ -58,7 +58,7 @@
             "description": "draft deploy or production deploys"
         },
         "message": {
-            "type": "undefined",
+            "type": "string",
             "description": "a short message to associate with the deploys"
         },
         "deployTimeout": {
