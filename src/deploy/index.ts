@@ -177,13 +177,13 @@ export default createBuilder(
                 console.log(
                     `Deploying functions from 📂 ./${builderConfig.netlifyConfig.functionsPath}`
                 );
-                config = { ...config.netlifyConfig, fnDir: builderConfig.netlifyConfig.functionsPath  };
+                config = { ...config, fnDir: builderConfig.netlifyConfig.functionsPath  };
             }
 
             const response = await client.deploy(
                 siteId,
                 builderConfig.netlifyConfig.outputPath,
-                config
+                { ...config, ...config.netlifyConfig }
             );
             context.logger.info(
                 `✔ Your updated site 🕸  is running at ${response.deploy.ssl_url}`
