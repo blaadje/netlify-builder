@@ -19,14 +19,6 @@
             "default": false,
             "description": "Skip build process during deployment."
         },
-        "outputPath": {
-            "type": "string",
-            "description": "This is one of the options you can freely choose according to your needs. --- We will 'deploy' to this folder."
-        },
-        "functionsPath": {
-            "type": "string",
-            "description": "Path to the functions folder you want to deploy"
-        },
         "netlifyToken": {
             "type": "string",
             "description": "Acess token give you the ability to communicate with netlify over API."
@@ -49,10 +41,10 @@
             "default": false,
             "description": "To be used with Nx if app needs to be built with-deps"
         },
-        "draft": {
-            "type": "boolean",
-            "default":false,
-            "description": "Creates a draft environment instead of production"
+        "netlifyConfig": {
+            "type": "object",
+            "default": {},
+            "description": "Provide netlify options"
         }
     }
 }

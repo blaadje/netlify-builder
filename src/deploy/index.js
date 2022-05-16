@@ -14,6 +14,7 @@ const NetlifyAPI = require("netlify");
 exports.default = architect_1.createBuilder((builderConfig, context) => __awaiter(void 0, void 0, void 0, function* () {
     context.reportStatus(`Executing deploy...`);
     context.logger.info(`Executing netlify deploy command ...... `);
+    console.log('coucou', builderConfig);
     if (builderConfig.noBuild) {
         context.logger.info(`📦 Skipping build`);
     }
@@ -131,15 +132,13 @@ exports.default = architect_1.createBuilder((builderConfig, context) => __awaite
     }
     // lets deploy the application to the site
     try {
-        context.logger.info(`Deploying project from 📂 ./${builderConfig.outputPath}`);
-        let config = {
-            draft: builderConfig.draft
-        };
-        if (builderConfig.functionsPath) {
-            console.log(`Deploying functions from 📂 ./${builderConfig.functionsPath}`);
-            config = Object.assign(Object.assign({}, config), { fnDir: builderConfig.functionsPath });
+        context.logger.info(`Deploying project from 📂 ./${builderConfig.netlifyConfig.outputPath}`);
+        let config;
+        if (builderConfig.netlifyConfig.functionsPath) {
+            console.log(`Deploying functions from 📂 ./${builderConfig.netlifyConfig.functionsPath}`);
+            config = Object.assign(Object.assign({}, config.netlifyConfig), { fnDir: builderConfig.netlifyConfig.functionsPath });
         }
-        const response = yield client.deploy(siteId, builderConfig.outputPath, config);
+        const response = yield client.deploy(siteId, builderConfig.netlifyConfig.outputPath, config);
         context.logger.info(`✔ Your updated site 🕸  is running at ${response.deploy.ssl_url}`);
         return { success: true };
     }

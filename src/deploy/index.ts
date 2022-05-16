@@ -15,6 +15,8 @@ export default createBuilder(
         context.reportStatus(`Executing deploy...`);
         context.logger.info(`Executing netlify deploy command ...... `);
 
+        console.log('coucou', builderConfig)
+
         if (builderConfig.noBuild) {
             context.logger.info(`📦 Skipping build`);
         } else {
@@ -166,23 +168,21 @@ export default createBuilder(
         // lets deploy the application to the site
         try {
             context.logger.info(
-                `Deploying project from 📂 ./${builderConfig.outputPath}`
+                `Deploying project from 📂 ./${builderConfig.netlifyConfig.outputPath}`
             );
 
-            let config: any = {
-                draft: builderConfig.draft 
-            };
+            let config
 
-            if (builderConfig.functionsPath) {
+            if (builderConfig.netlifyConfig.functionsPath) {
                 console.log(
-                    `Deploying functions from 📂 ./${builderConfig.functionsPath}`
+                    `Deploying functions from 📂 ./${builderConfig.netlifyConfig.functionsPath}`
                 );
-                config = { ...config, fnDir: builderConfig.functionsPath  };
+                config = { ...config.netlifyConfig, fnDir: builderConfig.netlifyConfig.functionsPath  };
             }
 
             const response = await client.deploy(
                 siteId,
-                builderConfig.outputPath,
+                builderConfig.netlifyConfig.outputPath,
                 config
             );
             context.logger.info(
