@@ -138,7 +138,7 @@ exports.default = architect_1.createBuilder((builderConfig, context) => __awaite
             console.log(`Deploying functions from 📂 ./${builderConfig.netlifyConfig.functionsPath}`);
             config = Object.assign(Object.assign({}, config), { fnDir: builderConfig.netlifyConfig.functionsPath });
         }
-        const response = yield client.deploy(siteId, builderConfig.outputPath, Object.assign(Object.assign({}, config), config.netlifyConfig));
+        const response = yield client.deploy(siteId, builderConfig.outputPath, Object.assign(Object.assign({}, config), builderConfig.netlifyConfig));
         context.logger.info(`✔ Your updated site 🕸  is running at ${response.deploy.ssl_url}`);
         return { success: true };
     }

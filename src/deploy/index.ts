@@ -183,7 +183,7 @@ export default createBuilder(
             const response = await client.deploy(
                 siteId,
                 builderConfig.outputPath,
-                { ...config, ...config.netlifyConfig }
+                { ...config, ...builderConfig.netlifyConfig }
             );
             context.logger.info(
                 `✔ Your updated site 🕸  is running at ${response.deploy.ssl_url}`
