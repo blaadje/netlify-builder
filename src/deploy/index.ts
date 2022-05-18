@@ -15,8 +15,6 @@ export default createBuilder(
         context.reportStatus(`Executing deploy...`);
         context.logger.info(`Executing netlify deploy command ...... `);
 
-        console.log('coucou', builderConfig)
-
         if (builderConfig.noBuild) {
             context.logger.info(`📦 Skipping build`);
         } else {
@@ -201,9 +199,6 @@ export default createBuilder(
 
                 return { ...acc, [item]: builderConfig[item] }
             }, {})
-
-
-            console.log(netlifyOptions)
 
             const response = await client.deploy(
                 siteId,

@@ -14,7 +14,6 @@ const NetlifyAPI = require("netlify");
 exports.default = architect_1.createBuilder((builderConfig, context) => __awaiter(void 0, void 0, void 0, function* () {
     context.reportStatus(`Executing deploy...`);
     context.logger.info(`Executing netlify deploy command ...... `);
-    console.log('coucou', builderConfig);
     if (builderConfig.noBuild) {
         context.logger.info(`📦 Skipping build`);
     }
@@ -158,7 +157,6 @@ exports.default = architect_1.createBuilder((builderConfig, context) => __awaite
             }
             return Object.assign(Object.assign({}, acc), { [item]: builderConfig[item] });
         }, {});
-        console.log(netlifyOptions);
         const response = yield client.deploy(siteId, builderConfig.outputPath, netlifyOptions);
         context.logger.info(`✔ Your updated site 🕸  is running at ${response.deploy.ssl_url}`);
         return { success: true };
